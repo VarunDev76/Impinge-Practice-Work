@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> JQuery practice </title>
+	<script src="../js/jquery.js"></script>
+	<script type="text/javascript">	
+		$(document).ready(function(){
+			$("#button").click(function(){
+				// $("#para").hide(1000);
+				$("#para").toggle(1000);
+				// hitIt();
+			});
+		});
+			function hitIt(){
+				alert("working fine");
+			}
+	</script>
+</head>
+<body>
+	<!-- Hide & Toggle Practice Code here -->
+		<p id="para"> click the button </p>
+		<button type="button" id="button"> Save Me </button>
+
+	<!-- onclick Function Code Here -->
+		<!-- <button type="button" onclick="hitIt()" id="button">On Click Me</button> -->
+		<!-- <button type="button" onmouseover="hitIt()" id="button">On Mouse Over Me</button> -->
+
+</body>
+</html>

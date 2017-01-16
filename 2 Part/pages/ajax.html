@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> JQuery practice </title>
+	<script src="../js/jquery.js"></script>
+	<script type="text/javascript">	
+		$name = $_POST['Name'];
+		alert("Save Records");
+	</script>
+</head>
+<body>
+	<!-- Ajax Code here -->
+		<form action="ajax.html" method="post">
+			<input type="text" id="Name" name="Name" placeholder="Enter User Name" />
+			<button type="button" id="submit" onclick="getElement()"> Save data </button>
+		</form>
+</body>
+</html>
