@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   
-  def index
+  def list
   	@users = User.all
   end
 
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   	if @user.valid?
   		@user.save
 		@msg = "User Saved Succesfully"
-		redirect_to :action=>'index'
+		redirect_to :action=>'list'
 	else
 		@errors = @user.errors.full_messages
   		render 'new'
@@ -26,12 +26,12 @@ class UsersController < ApplicationController
   end
 
 
-  def destroy
+  def delete
   	@id = params[:id]
   	@user = User.find(@id)
   	@user.destroy
 
-  	redirect_to :action=>"index"
+  	redirect_to :action=>"list"
   end
 
   def edit
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
 	if @user.update_attributes(users_params)
 		@msg = "User Will Update "
 		@user = User.all
-		redirect_to :action=>'index'
+		redirect_to :action=>'list'
 	else
 		@errors = @user.errors.full_messages
 		render 'edit'
@@ -55,7 +55,7 @@ class UsersController < ApplicationController
   end
 
   def users_params
-  	return params.require(:user).permit(:name , :email , :password , :address)
+  	return params.require(:user).permit(:email , :password )
   end
 
 end

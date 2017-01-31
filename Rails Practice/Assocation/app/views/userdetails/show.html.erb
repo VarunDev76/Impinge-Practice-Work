@@ -1,0 +1,7 @@
+<h1>Userdetails#show</h1>
+<p>Find me in app/views/userdetails/show.html.erb</p>
+<% @userdetails.each do|u| %>	
+	<%= u.user.nil? ? "No Email" : u.user.email %>
+	<%= u.name %>
+	<%= u.address %>
+<% end %>

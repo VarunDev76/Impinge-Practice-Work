@@ -1,17 +1,41 @@
 Rails.application.routes.draw do
+  # User Details Routes Start Here
   get 'userdetails/index'
+  
+  get 'userdetails/show'
 
   get 'userdetails/new'
 
   get 'userdetails/destroy'
 
-  resources :users
+  # User Details Endz Here
+  
+  # Users Routes Starts Here
+
+  get 'users/list'
+  
+  get 'users/new'
+  
+  get 'users/post'
+ 
+  post 'users/create'
+  
+  get 'users/update'
+ 
+  get 'users/post'
+  
+  get 'users/delete'
+
+  # Users Routes Endz Here
+
+
+  resources :users , :userdetail
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'users#new'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -61,4 +85,6 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  get ' :controller(/:action(/:id(/.:format))) ' => "foo#matcher"
+  post ' :controller(/:action(/:id(/.:format))) ' => "foo#matcher"
 end
