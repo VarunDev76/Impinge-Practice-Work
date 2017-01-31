@@ -6,23 +6,16 @@
 	</p>
 <% end %>
 
-<%= form_for :user users_index do|create| %>
-	<p>
-		<%= create.label :Name %>
-		<%= create.text_field :name %><br>
-	</p>
-	<p>
-		<%= create.label :Email %>
-		<%= create.text_field :email %><br>
-	</p>
-	<p>
-		<%= create.label :Password %>
-		<%= create.text_field :password %><br>
-	</p>
-	<p>
-		<%= create.label :Address %>
-		<%= create.text_field :address %><br>
-	</p>
+<% if @errors && @errors.size >  0 %>
+	<% @errors.each do|panga| %>
+		<p>
+			<h3> <%= panga %> </h3>
+		</p>
+	<% end %>
+<% end %>
+
+<%= form_for @user do|create| %>
+	<%= render :partial=>"form" , :locals=>{form:create} %>
 	<p>
 		<%= create.submit %>
 	</p>
