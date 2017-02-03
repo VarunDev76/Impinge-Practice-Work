@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  # User Details Routes Start Here
+  # USERS Details Routes Start Here
   get 'userdetails/index'
   
   get 'userdetails/show'
@@ -8,11 +8,12 @@ Rails.application.routes.draw do
 
   get 'userdetails/destroy'
 
-  # User Details Endz Here
+  # USERS Details Endz Here
   
   # Users Routes Starts Here
 
   get 'users/list'
+  post 'users/list'
   
   get 'users/new'
   
@@ -29,7 +30,7 @@ Rails.application.routes.draw do
   # Users Routes Endz Here
 
 
-  resources :users , :userdetail
+  resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

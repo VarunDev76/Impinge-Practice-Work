@@ -1,7 +1,41 @@
 <h1>Userdetails#show</h1>
 <p>Find me in app/views/userdetails/show.html.erb</p>
-<% @userdetails.each do|u| %>	
-	<%= u.user.nil? ? "No Email" : u.user.email %>
-	<%= u.name %>
-	<%= u.address %>
+
+<style type="text/css" media="screen">
+	.row{
+		width:100%;
+		height: auto;
+		padding:0.5% 0;
+		margin:1% 0;
+	}
+	.col{
+		float:left;
+		width:20%;
+		margin:0 auto;
+		text-align: center;
+	}
+</style>
+<% if @errors && @errors.size > 0  %>
+	<% @errors.each do|e| %>
+		<p>
+			<%= e  %>
+		</p>
+	<% end %>
+<% end %>
+<div class="row">
+	<div class="col"> Id </div>
+	<div class="col"> User Id </div>
+	<div class="col"> Name </div>
+	<div class="col"> Address </div>
+	<div class="col"> Button </div>
+</div>
+
+<% @users.each do |u| %>	
+	<div class="row">
+		<div class="col"> <%=  u.id %> </div>
+		<div class="col"> <%=  u.user_id %> </div>
+		<div class="col"> <%= u.name %> </div>
+		<div class="col"> <%= u.address %> </div>
+		<div class="col"> <%= link_to("Delete" , {:controller=>"userdetails ", :action=>"destroy" , :id=>u.id}) %> </div>
+	</div>
 <% end %>

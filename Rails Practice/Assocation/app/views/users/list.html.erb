@@ -8,9 +8,10 @@
 			<p>
 				<%= u.id %>
 				<%= u.email %>
-				<%= link_to("Delete" , {:controller=>"users" , :action=>"delete" ,:id=>u.id}, method: :delete, data: {confirm: 'Are you Sure'} ) %>
+				<%= link_to("Delete" , {:controller=>"users" , :action=>"destroy" ,:id=>u.id}, method: :delete, data: {confirm: 'Are you Sure'} ) %>
 				<%= link_to("Edit" , {:controller=>"Users", :action=>"edit" , :id=>u.id } ) %>
 				<%= link_to("New User" , {:controller=>"users" , :action=>"new" } ) %>
+				<%= link_to("Show " , {:controller=>"userdetails" , :action=>"new" , :id=>u.id} ) %>
 			</p>
 		<% end %>
 	<% end %>

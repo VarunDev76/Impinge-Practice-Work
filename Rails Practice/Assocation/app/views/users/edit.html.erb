@@ -1,6 +1,9 @@
 <h1>Users#update</h1>
 <p>Find me in app/views/users/update.html.erb</p>
 <%= form_for @user, :url=>{:controller=>"users" , :action=>"update"} do|update| %>
+	
+	<%= update.label ("Id Id :> ") %>
+	<%= @user.id %>
 	<%= render :partial=>"form" , :locals=>{form:update} %>
 	<p>
 		<%= update.submit %>

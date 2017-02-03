@@ -11,6 +11,7 @@ class UsersController < ApplicationController
 
   def new
   	@user = User.new
+    @user = User.new.build_userdetail
   end
 
   def create
@@ -26,12 +27,12 @@ class UsersController < ApplicationController
   end
 
 
-  def delete
+  def destroy
   	@id = params[:id]
   	@user = User.find(@id)
-  	@user.destroy
-
-  	redirect_to :action=>"list"
+  	if @user.destroy
+  	  redirect_to users_list_path
+    end
   end
 
   def edit
@@ -41,12 +42,12 @@ class UsersController < ApplicationController
 
   def update
   	@id = params[:id]
-	@user = User.find(@id)  
+    @user = User.find(@id)  
 
 	if @user.update_attributes(users_params)
 		@msg = "User Will Update "
 		@user = User.all
-		redirect_to :action=>'list'
+		render 'list'
 	else
 		@errors = @user.errors.full_messages
 		render 'edit'
@@ -55,7 +56,7 @@ class UsersController < ApplicationController
   end
 
   def users_params
-  	return params.require(:user).permit(:email , :password )
+  	return params.require(:user).permit(:email , :password, userdetail_attributes: [:name, :address] )
   end
 
 end

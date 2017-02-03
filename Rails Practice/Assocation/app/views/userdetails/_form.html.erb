@@ -1,0 +1,13 @@
+
+
+
+ <%= f.fields_for :userdetail do |b| %>
+    <p>
+		<%= b.label :Name  %>
+		<%= b.text_field :name  %><br>
+	</p>
+	<p>
+		<%= b.label :Address  %>
+		<%= b.text_field :address  %><br>
+	</p>
+  <% end %>

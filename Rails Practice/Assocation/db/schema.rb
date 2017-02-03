@@ -14,17 +14,18 @@
 ActiveRecord::Schema.define(version: 20170131135547) do
 
   create_table "userdetails", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "address",    limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "user_id",    limit: 4
+    t.string   "name",       limit: 60
+    t.string   "address",    limit: 60
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",      limit: 255
-    t.string   "password",   limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "email",      limit: 30
+    t.string   "password",   limit: 20
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
 end
