@@ -1,0 +1,29 @@
+<h1>Users#show</h1>
+<p>Find me in app/views/users/show.html.erb</p>
+<style type="text/css" media="screen">
+	.row{
+		display: flex;
+		flex-direction:row;
+		width:100%;
+		flex-wrap:wrap;
+		padding:1% 0;
+	}
+	.colm{
+		flex-wrap:wrap;
+		width:25%;
+		padding:1%;
+		word-wrap:break-word;
+		text-align:center;
+		font-size:20px;
+	}
+</style>
+<div class="row">
+	<div class="colm"> <strong> Id:> </strong> </div>
+	<div class="colm"> <%= @users.id  %> </div>
+</div>
+<div class="row">
+	<div class="colm"> <strong> Email:> </strong> </div>
+	<div class="colm"> <%= @users.email  %> </div>
+</div>
+
+

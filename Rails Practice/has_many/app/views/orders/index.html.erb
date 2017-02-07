@@ -1,0 +1,53 @@
+<h1>Orders#index</h1>
+<p>Find me in app/views/orders/index.html.erb</p>
+<style type="text/css" media="screen">
+	.row{
+		display: flex;
+		flex-direction:row;
+		width:100%;
+		flex-wrap:wrap;
+		padding:1% 0;
+	}
+	.center{
+		width:85%;
+		display: flex;
+		margin:0 auto;
+	}
+	.colm{
+		/*flex:1;*/
+		flex-wrap:wrap;
+		width:15%;
+		word-wrap:break-word;
+		text-align: center;
+		padding:1%;
+		font-size:20px;
+	}
+</style>
+	
+<div class="row">
+	<div class="center">
+		<div class="colm"> <strong> Id </strong> </div>
+		<div class="colm"> <strong> User Id </strong> </div>
+		<div class="colm"> <strong> User Email </strong> </div>
+		<div class="colm"> <strong> Order Item </strong> </div>
+		<div class="colm"> <strong> Order Payment </strong> </div>
+		<div class="colm"> <strong> Buttons </strong> </div>
+	</div>
+</div>
+
+	<% @orders.each do |o| %>
+		<div class="row">
+			<div class="center">		
+				<div class="colm"> <%= o.id %> </div>
+				<div class="colm"> <%= o.user_id %> </div>
+				<div class="colm"> <%= o.user.try(:email) %> </div>
+				<div class="colm"> <%= o.order_item %> </div>
+				<div class="colm"> <%= o.payment %> </div>
+				<div class="colm">
+					<%= link_to "Show" , user_order_path(o.user_id , o) %> 
+					<%= link_to "Edit" , edit_user_order_path(o.user_id , o) %> 
+					<%= link_to "Delete" , user_order_path(o.user_id , o) , method: :delete , data: {confirm: 'Are You Sure'}  %> 
+				</div>
+			</div>
+		</div>
+	<% end %>

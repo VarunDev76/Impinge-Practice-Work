@@ -1,17 +1,17 @@
 class UserdetailsController < ApplicationController
   def index
- 	 
-  end
-
-  def show
-    
-  	@users = Userdetail.all
+ 	 @users = Userdetail.all
     @page_title = "User Details "
     if @users.nil?
       @errors = @users.errors.full_messages
         render 'new'
       
     end
+  end
+
+  def show
+    
+  	
   end
 
   def new

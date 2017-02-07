@@ -14,10 +14,3 @@
 	<% end %>
 <% end %>
 
-<%= form_for :user , :url=>{:controller=>"users", :action=>"create"} do|create| %>
-	<%= render :partial=>"form" , :locals=>{form:create} %>
-	<p>
-		<%= create.submit %>
-	</p>
-
-<% end %>

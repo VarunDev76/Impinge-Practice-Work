@@ -1,37 +1,40 @@
 Rails.application.routes.draw do
-  # USERS Details Routes Start Here
-  get 'userdetails/index'
   
-  get 'userdetails/show'
 
-  get 'userdetails/new'
+  # USERS Details Routes Start Here
+  # get 'userdetails/index'
+  
+  # get 'userdetails/show'
 
-  get 'userdetails/destroy'
+  # get 'userdetails/new'
+
+  # get 'userdetails/destroy'
 
   # USERS Details Endz Here
   
   # Users Routes Starts Here
 
   get 'users/list'
-  post 'users/list'
   
-  get 'users/new'
+  # get 'users/new'
   
-  get 'users/post'
+  # get 'users/post'
  
-  post 'users/create'
+  # post 'users/create'
   
-  get 'users/update'
+  # get 'users/update'
  
-  get 'users/post'
+  # get 'users/post'
   
-  get 'users/delete'
+  # get 'users/delete'
 
   # Users Routes Endz Here
 
 
-  resources :users
-
+  resources :users do|e|
+    resources :userdetails , :orders
+  end 
+  get '/userdetails' => 'userdetails#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

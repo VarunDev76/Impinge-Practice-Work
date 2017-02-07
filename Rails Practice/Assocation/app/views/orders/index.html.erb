@@ -1,0 +1,24 @@
+<h1>Orders#index</h1>
+<p>Find me in app/views/orders/index.html.erb</p>
+<table>
+	<caption>table title and/or explanatory text</caption>
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Email</th>
+			<th>Userdetails Name</th>
+			<th>Userdetails Address</th>
+			<th>Payment</th>
+		</tr>
+	</thead>
+	<tbody>
+	<% @orders.each do|o| %>
+		<tr>
+			<td>o.id</td>
+			<td>o.user.email</td>
+			<td>o.user.userdetails.name</td>
+			<td>o.user.userdetails.address</td>
+		</tr>
+	<% end %>
+	</tbody>
+</table>

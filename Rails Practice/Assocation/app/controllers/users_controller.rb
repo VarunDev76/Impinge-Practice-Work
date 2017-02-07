@@ -5,8 +5,8 @@ class UsersController < ApplicationController
   end
 
   def show
-  	@id = params[:id]
-  	@users = User.find(@id)
+  	# @id = params[:id]
+  	# @users = User.find(@id)
   end
 
   def new
@@ -18,8 +18,8 @@ class UsersController < ApplicationController
   	@user = User.new(users_params)
   	if @user.valid?
   		@user.save
-		@msg = "User Saved Succesfully"
-		redirect_to :action=>'list'
+  		@msg = "User Saved Succesfully"
+  		redirect_to users_list_path
 	else
 		@errors = @user.errors.full_messages
   		render 'new'
