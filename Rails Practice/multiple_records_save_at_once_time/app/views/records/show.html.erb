@@ -1,2 +1,49 @@
 <h1>Records#show</h1>
 <p>Find me in app/views/records/show.html.erb</p>
+<style type="text/css" media="screen">
+	.row{
+		display: flex;
+		flex-direction:row;
+		width:100%;
+		flex-wrap:wrap;
+		padding:1% 0;
+	}
+	.center{
+		width:85%;
+		display: flex;
+		margin:0 auto;
+		border-bottom:3px dashed #000;
+	}
+	.colm{
+		/*flex:1;*/
+		flex-wrap:wrap;
+		width:30%;
+		word-wrap:break-word;
+		text-align: center;
+		padding:1%;
+		font-size:30px;
+	}
+	.btn{text-decoration:none;}
+</style>
+
+<div class="row">
+	<div class="center">
+		<div class="colm"> <strong> Id </strong> </div>
+		<div class="colm"> <strong> User Id </strong> </div>
+		<div class="colm"> <strong> User Name </strong> </div>
+		<div class="colm"> <strong> User Value </strong> </div>
+		<div class="colm"> <strong> Buttons </strong> </div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="center">
+		<div class="colm"> <strong> <%= @record.id %> </strong> </div>
+		<div class="colm"> <%= @record.user_id %>  </div>
+		<div class="colm"> <%= @record.user.name %>  </div>
+		<div class="colm"> <%= @record.value %>  </div>
+		<div class="colm"> 
+			<%= link_to " Show " , user_records_path %>  
+		</div>
+	</div>
+</div>

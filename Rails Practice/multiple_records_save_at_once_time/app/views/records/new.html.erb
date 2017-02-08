@@ -1,2 +1,25 @@
 <h1>Records#new</h1>
 <p>Find me in app/views/records/new.html.erb</p>
+
+<%= form_for @records, url: user_records_path do |rec| %>
+	<div id="old_choice">	
+		<%= render partial: "field", locals: {rec: rec}  %>
+	</div>
+	<a href="javascript:;" id="add_new_value">Add New Value</a>
+
+	<p>
+		<%= rec.submit %>
+	</p>
+	<div style="display:none;" id="new_choice_form">
+		<%= render partial: "field" , locals: {rec: rec} %>
+	</div>
+<% end %>
+
+
+<script type="text/javascript">
+	$("#add_new_value").click(function(){
+		$("#old_choice").append($("#new_choice_form").html());
+	})
+
+</script>
+
