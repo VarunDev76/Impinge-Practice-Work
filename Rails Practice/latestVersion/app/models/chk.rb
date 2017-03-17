@@ -1,0 +1,2 @@
+class Chk < ApplicationRecord
+end

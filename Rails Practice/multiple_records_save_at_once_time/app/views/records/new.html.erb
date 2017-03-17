@@ -1,7 +1,7 @@
 <h1>Records#new</h1>
 <p>Find me in app/views/records/new.html.erb</p>
 
-<%= form_for @records, url: user_records_path do |rec| %>
+<%= form_for @order, url: user_records_path(@user) do |rec| %>
 	<div id="old_choice">	
 		<%= render partial: "field", locals: {rec: rec}  %>
 	</div>
@@ -10,16 +10,23 @@
 	<p>
 		<%= rec.submit %>
 	</p>
-	<div style="display:none;" id="new_choice_form">
-		<%= render partial: "field" , locals: {rec: rec} %>
-	</div>
+	<%#= rec.fields_for :value do |recs| %>
+		<!-- <div style="display:none;" id="new_choice_form">
+			<%#= render partial: "field" , locals: {rec: recs} %>
+		</div> -->
+	<%# end %>
 <% end %>
 
 
 <script type="text/javascript">
-	$("#add_new_value").click(function(){
-		$("#old_choice").append($("#new_choice_form").html());
-	})
+	$(document).ready(function(){
+		$("#add_new_value").click(function(){
+			$("#old_choice").append($("#new_choice_form").html());
+		});
+		$("#remove-value").click(function(){
+			$(this).parent('#new_choice_form').remove();
+		});
+	});
 
 </script>
 

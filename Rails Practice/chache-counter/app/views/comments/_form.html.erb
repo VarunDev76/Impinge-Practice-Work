@@ -1,0 +1,7 @@
+<%= f.fields_for :comments do|rec| %>
+	<p>
+		<%= rec.label "Write Comment" %>
+		<%= rec.text_field :comment %>
+
+	</p>
+<% end %>

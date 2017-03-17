@@ -1,0 +1,2 @@
+class Most < ApplicationRecord
+end

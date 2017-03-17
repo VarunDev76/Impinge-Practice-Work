@@ -1,0 +1,2 @@
+class FormPage < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+module AllattributesHelper
+end

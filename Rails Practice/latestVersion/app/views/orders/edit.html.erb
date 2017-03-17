@@ -1,0 +1,6 @@
+<h1>Orders#edit</h1>
+<p>Find me in app/views/orders/edit.html.erb</p> 
+<%= form_for @select , {url: orders_path} do|full|  %>
+	<%= full.select(:city, options_for_select( Order.all.map(&:city) , Order.all.map(&:id)  ) ) %>
+	<%= link_to "Send Id" , orders_path(full) %>
+<% end %>

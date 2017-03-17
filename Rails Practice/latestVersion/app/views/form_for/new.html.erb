@@ -1,0 +1,10 @@
+<h1>FormFor#new</h1>
+<p>Find me in app/views/form_for/new.html.erb</p>
+<%= form_for @article, url: {action: "create"} do|f|%>
+	<%= f.text_field :title %><br><br>
+	<%= f.text_area :address ,size: "60x12" %><br><br>
+		<%= f.fields_for @article.posts.new do|post_details|  %>
+			<%= post_details.text_field :name %><br><br>
+		<% end %>
+	<%= f.submit "Create" %>
+<% end %>

@@ -1,0 +1,6 @@
+<h1>SelectTag#new</h1>
+<p>Find me in app/views/select_tag/new.html.erb</p>
+<%= form_for @select ,url:{action: "index"} do|f| %>
+	<%= select_year(Date.today, :start_year => Time.now.year, :end_year => Time.now.year - 95 , :field_name => 'grade_year')  %>
+	<%= f.submit %>
+<% end %>

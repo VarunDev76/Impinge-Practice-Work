@@ -1,0 +1,2 @@
+class UploadMaterial < ApplicationRecord
+end

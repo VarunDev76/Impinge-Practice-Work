@@ -1,8 +1,4 @@
 <h1> Welecome Create Page </h1>
-<% if @records && @records.size > 0  %>
-	<% @records.each do|rec| %>
-		<p>
-			<%= rec.value  %>
-		</p>
-	<% end  %>
-<% end %>
+
+	<h3> <%= @record.user_id %> </h3>
+	<h3> <%= @record.value %> </h3>

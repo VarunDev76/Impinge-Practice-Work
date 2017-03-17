@@ -1,6 +1,8 @@
-<div class="choice_form">
-	<p>	
-		<%= rec.label :value %>
-		<%= rec.text_field :value %>
-	</p>
-</div>
+<%= rec.fields_for :records do |builder| %>
+	<div class="choice_form">
+		<p>	
+			<%= builder.label "Value" %>
+			<%= builder.text_field :value %> 
+		</p>
+	</div>
+<% end %>

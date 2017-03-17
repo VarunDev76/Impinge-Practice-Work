@@ -11,8 +11,13 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def update
+    @user_records = params[:user_id]
+  end
+
   def new
     @users = User.new
+    # @user = User.new.build_value
   end
 
   def create
@@ -35,7 +40,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    return params.require(:user).permit(:name)
+    return params.require(:user).permit(:name, :value)
   end
 
 end

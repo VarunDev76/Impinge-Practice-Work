@@ -1,0 +1,2 @@
+class Allattribute < ApplicationRecord
+end

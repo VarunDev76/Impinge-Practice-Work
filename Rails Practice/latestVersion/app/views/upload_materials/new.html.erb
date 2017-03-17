@@ -1,0 +1,10 @@
+<h1>UploadMaterials#new</h1>
+<p>Find me in app/views/upload_materials/new.html.erb</p>
+<%= form_for @select do|full| %>
+	<p>
+		<%= full.file_field :picture %>
+	</p>
+	<p>
+		<%= full.submit %>
+	</p>
+<% end %>

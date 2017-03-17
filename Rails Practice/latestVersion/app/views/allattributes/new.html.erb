@@ -1,0 +1,28 @@
+<h1>FormPages#new</h1>
+<p>Find me in app/views/form_pages/new.html.erb</p>
+<%= form_tag({controller:"form_pages",action: "index"} , method: "post") do %>
+	<%= label_tag(:q , "Search For: ") %>
+	<%= text_field_tag(:q) %><br>
+	<%= check_box_tag(:pet_Dog) %>
+	<%= label_tag(:pet_Dog, "I own a Dog") %><br>
+	<%= radio_button_tag(:age, "child") %>
+	<%= label_tag(:age, "I'm younger than 21 ") %><br>
+	<%= radio_button_tag(:age, "adult") %>
+	<%= label_tag(:age, "I'm over than 21 ") %><br>
+	<%= text_area_tag(:message, "Hi Nce Site", size:"24x6") %><br>
+	<%= password_field_tag(:password) %><br>
+	<%= hidden_field_tag(:parent_id , "5") %><br>
+	<%= search_field(:user , :name) %><br><br>
+	<%= telephone_field(:user , :name) %><br><br>
+	<%= date_field(:user , :born_on) %><br><br>
+	<%= datetime_local_field(:user , :graduation_day) %><br><br>
+	<%= month_field(:user , :month_day) %><br><br>
+	<%= week_field(:user , :week_day) %><br><br>
+	<%= url_field(:user , :homepage) %><br><br>
+	<%= email_field(:user , :address) %><br><br>
+	<%= color_field(:user , :favt_color) %><br><br>
+	<%= time_field(:task , :started_at) %><br><br>
+	<%= number_field(:product , :price , in: 1..20 , step: 0.5 ) %><br><br>
+	<%= range_field(:product , :discount , in: 1..100  ) %><br><br>
+	<%= submit_tag("Search") %>
+<% end %>

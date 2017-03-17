@@ -1,0 +1,2 @@
+class Multipleselect < ApplicationRecord
+end

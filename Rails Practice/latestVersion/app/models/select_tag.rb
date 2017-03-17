@@ -1,0 +1,2 @@
+class SelectTag < ApplicationRecord
+end
