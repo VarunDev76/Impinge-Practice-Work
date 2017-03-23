@@ -1,0 +1,61 @@
+<h1>Homes#new</h1>
+<p>Find me in app/views/homes/new.html.erb</p>
+
+<div id="wrapper">
+
+<div id="page-wrapper" class="gray-bg">
+
+<div class="wrapper wrapper-content">
+    <div class="row animated fadeInDown">
+        <div class="col-lg-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Draggable Events</h5>
+                </div>
+                <div class="ibox-content">
+                    <div id='external-events'>
+                        <p>Drag a event and drop into callendar.</p>
+                        <div class='external-event navy-bg'>Go to shop and buy some products.</div>
+                        <div class='external-event navy-bg'>Check the new CI from Corporation.</div>
+                        <div class='external-event navy-bg'>Send documents to John.</div>
+                        <div class='external-event navy-bg'>Phone to Sandra.</div>
+                        <div class='external-event navy-bg'>Chat with Michael.</div>
+                        <p class="m-t">
+                            <input type='checkbox' id='drop-remove' class="i-checks" checked /> <label for='drop-remove'>remove after drop</label>
+                        </p>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+        <div class="col-lg-9">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Striped Table </h5>
+                </div>
+                <div class="ibox-content">
+                    <div id="calendar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+
+<div id="modal" class="modal fade">
+    <div class="modal-dialog animated">
+        <div class="modal-content">
+            <%= form_for @select , html: {class: "form-horizontal"}  do|t| %>
+                <%= render partial: 'events' , locals: {t:t} %>
+            <% end %>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <a href="#" id="showModal" class="btn btn-success">Show modal</a>
+    </div>
+</div>
