@@ -1,0 +1,36 @@
+<div class="modal-header">
+    <strong>Yep, I'm a dialog...</strong>
+</div>
+
+<div class="modal-body">
+    <div class="form-group">
+        <%= t.label "Full Name" , class: "control-label col-xs-4" %>
+        <div class="input-group col-xs-7">
+            <%= t.text_field :name , class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= t.label "Starting Date" , class: "control-label col-xs-4" %>
+        <div class="input-group col-xs-7">
+            <%= t.date_field :starting_date , class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= t.label "Ending Date", class: "control-label col-xs-4" %>
+        <div class="input-group col-xs-7">
+            <%= t.date_field :ending_date ,class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= t.label "Description" , class: "control-label col-xs-4" %>
+        <div class="input-group col-xs-7">
+            <%= t.text_area :description , class: "form-control" , size: "2X25" %>
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-default" id="close" type="button" data-dismiss="modal" onclick="modal.close();">Cancel</button>
+    
+    <%= t.submit "Save", class: "btn btn-primary" %>
+</div>

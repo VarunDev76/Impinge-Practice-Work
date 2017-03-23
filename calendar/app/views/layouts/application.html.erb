@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <link href="/assets/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/font-awesome.css" rel="stylesheet">
+
+    <link href="/assets/custom.css" rel="stylesheet">
+
+    <link href="/assets/fullcalendar.css" rel="stylesheet">
+    <link href="/assets/fullcalendar.print.css" rel='stylesheet' media='print'>
+
+    <link href="/assets/animate.css" rel="stylesheet">
+    <link href="/assets/style.css" rel="stylesheet">
+    <link href="/assets/rmodal.css" rel="stylesheet">
+
+    <%#= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+</head>
+
+<body>
+
+<%=yield%>
+
+
+<script src="/assets/moment.min.js"></script>
+<script src="/assets/jquery.js"></script>
+<script src="/assets/bootstrap.min.js"></script>
+<script src="/assets/jquery.metisMenu.js"></script>
+<script src="/assets/jquery.slimscroll.min.js"></script>
+
+<script src="/assets/inspinia.js"></script>
+<script src="/assets/pace.min.js"></script>
+
+<script src="/assets/jquery-ui.custom.min.js"></script>
+
+<script src="/assets/icheck.min.js"></script>
+
+<script src="/assets/fullcalendar.min.js"></script>
+
+<script src="/assets/rmodal.js"></script>
+<script>
+
+    $(document).ready(function() {
+
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green'
+            });
+
+        /* initialize the external events
+         -----------------------------------------------------------------*/
+
+
+        $('#external-events div.external-event').each(function() {
+
+            // store data so the calendar knows to render an event upon drop
+            $(this).data('event', {
+                title: $.trim($(this).text()), // use the element's text as the event title
+                stick: true // maintain when user navigates (see docs on the renderEvent method)
+            });
+
+            // make the event draggable using jQuery UI
+            $(this).draggable({
+                zIndex: 1111999,
+                revert: true,      // will cause the event to go back to its
+                revertDuration: 0  //  original position after the drag
+            });
+
+        });
+
+
+        /* initialize the calendar
+         -----------------------------------------------------------------*/
+        var date = new Date();
+        var d = date.getDate();
+        var m = date.getMonth();
+        var y = date.getFullYear();
+
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            editable: true,
+            droppable: true, // this allows things to be dropped onto the calendar
+            drop: function() {
+                // is the "remove after drop" checkbox checked?
+                if ($('.navy-bg').is(':checked')) {
+                    // if so, remove the element from the "Draggable Events" list
+                    
+                }
+                var singleObject = $(this);
+                console.log(singleObject);
+                $("#modal").modal("show");
+
+                $(".fc-day-grid-event").click(function(){
+                    var singleObject = $(this);
+                    console.log(singleObject);
+                    $("#modal").modal("show");
+                });
+            },
+            events: [
+                {
+                    title: 'All Day Event',
+                    start: new Date(y, m, 1)
+                },
+                {
+                    title: 'Long Event',
+                    start: new Date(y, m, d-5),
+                    end: new Date(y, m, d-2)
+                },
+                {
+                    id: 999,
+                    title: 'Repeating Event',
+                    start: new Date(y, m, d-3, 16, 0),
+                    allDay: false
+                },
+                {
+                    id: 999,
+                    title: 'Repeating Event',
+                    start: new Date(y, m, d+4, 16, 0),
+                    allDay: false
+                },
+                {
+                    title: 'Meeting',
+                    start: new Date(y, m, d, 10, 30),
+                    allDay: false
+                },
+                {
+                    title: 'Lunch',
+                    start: new Date(y, m, d, 12, 0),
+                    end: new Date(y, m, d, 14, 0),
+                    allDay: false
+                },
+                {
+                    title: 'Birthday Party',
+                    start: new Date(y, m, d+1, 19, 0),
+                    end: new Date(y, m, d+1, 22, 30),
+                    allDay: false
+                },
+                <% Home.all.each do|e| %>
+                {
+                	title: '<%= e.name %>',
+                	start: '<%= e.starting_date %>',
+                	end: '<%= e.ending_date %>',
+                },
+                <% end %>
+                {
+                    title: 'Click for Google',
+                    start: new Date(y, m, 28),
+                    end: new Date(y, m, 29),
+                    url: 'http://google.com/'
+                }
+
+            ]
+        });
+	$(".fc-day-grid-event").click(function(){
+		var title = $(this).find(".fc-content").text();
+		console.log(title);
+        var singleObject = $(this);
+        console.log(singleObject);
+        $("#modal").modal("show");
+        // var name = $(title).val( $(this).text() ).keyup();
+        $.ajax({
+          url: "/events",
+          type: "POST",
+          data: "title="+title,
+          success: function(res) {
+            var allData = res.data;
+            alert(res.data.name);
+            $(".modal-header").append(html)
+            // $("#calendar").fullCalendar("renderEvent", dataDate, true);
+            // $("#calendar").fullCalendar("refetchEvents");
+          }
+        });
+        // console.log(name);
+    });
+
+    });
+
+    window.onload = function() {
+        var modal = new RModal(document.getElementById('modal'), {});
+
+
+        $('#showModal').click(function(e) {
+            e.preventDefault();
+            modal.open();
+        });
+
+        window.modal = modal;
+    }
+
+</script>
+</body>
+
+</html>

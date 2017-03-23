@@ -1,0 +1,10 @@
+<h1> Homes#index </h1>
+<p> Find me in app/views/homes/index.html.erb </p>
+<% @data.each do|f| %>
+    <p>
+        <div class="hint"> <strong>	id	</strong>	<%= f.name %>	</div>	
+        <div class="hint"> <strong>	strarting date	</strong> 	<%= f.starting_date %>	</div>	
+        <div class="hint"> <strong>	ending date	</strong> 	<%= f.ending_date %>	</div>	
+        <div class="hint"> <strong>	description	</strong>	<%= f.description %>	</div>	
+    </p>
+<% end %>
