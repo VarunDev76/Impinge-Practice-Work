@@ -1,0 +1,42 @@
+<h1>Users#new</h1>
+<p>Find me in app/views/users/new.html.erb</p>
+<%= form_for @user , url: users_url do |data| %>
+	<p>
+		<%= data.label :Email %>
+		<%= data.text_field :email %> <br>
+	</p>
+	<p>
+		<%= data.label :Password %>
+		<%= data.password_field :password %> <br>
+	</p>
+	<div id="order_item" >
+		<%= render partial: 'form', locals: {data: data}  %> <br>
+	</div>
+	
+	<div id="order_append"></div>
+
+	<p>
+		<%= data.label ' Add Order ' %> 
+		<%= link_to " Add Order", "javascript:;" , id: "add_order"  %>
+	</p>
+	<p>
+		<%= data.submit %> <br>
+	</p>
+<% end %>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		var allCount = 0;
+		var allId = 0;
+		$("#add_order").click(function(){
+			var orderData = $("#order_item").clone().find('.add_order').end().appendTo("#order_append");
+			orderData.find("#user_orders_attributes_" + allId + "_order_name").attr("name" , "user[orders_attributes][" + allCount + "][order_name]").attr("id" , "user_orders_attributes_" + allCount + "_order_name");
+			orderData.find("#user_orders_attributes_" + allId + "_order_description").attr("name" , "user[orders_attributes][" + allCount + "][order_description]").attr("id" , "user_orders_attributes_" + allCount + "_order_description");
+			
+			allCount += orderData.length;
+
+			// allId += orderData.length
+			// console.log(allCount.length);
+		});
+	});
+</script>

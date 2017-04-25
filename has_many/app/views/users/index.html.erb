@@ -1,0 +1,94 @@
+<h1>Users#index</h1>
+<p>Find me in app/views/users/index.html.erb</p>
+
+<style type="text/css">
+	.container{
+		display:flex;
+		flex-flow:row wrap;
+		justify-content:center;
+		width:100%;
+		overflow:hidden;
+	}
+	.center{
+		width:80%;
+	}
+	.row{
+		display:flex;
+		flex-flow:row wrap;
+		align-items:center;
+		justify-content:center;
+		width:100%;
+		border-bottom:2px dotted #000;
+	}
+	.colm{
+		width:350px;
+		justify-content:center;
+		line-height:70px;
+	}
+	.btn-container{
+		display:flex;
+		flex-flow:row wrap;
+		justify-content:space-around;
+		width:100%;
+	}
+	.btn-box{
+		display:flex;
+		flex-flow:row wrap;
+		justify-content:space-around;
+		padding:5% 1%;
+		width:160px;
+		line-height:20px;
+		align-items:center;
+	}
+	.btn{
+		border-radius:8px;
+		padding:10px 20px;
+		margin-top:1%;
+		font-size:20px;
+		font-weight:bold;
+		text-decoration:none;
+	}
+	.btn-success{background:#00a300; color:#fff; }
+	.btn-danger{background:#ee1111; color:#fff; }
+	.btn-warning{background: #da532c; color:#fff; }
+</style>
+
+<div class="container">
+	<div class="center">
+		<div class="row">
+			<div class="colm"> <h2> <strong> Id </strong> </h2> </div>
+			<div class="colm"> <h2> <strong> Email </strong> </h2> </div>
+			<div class="colm"> <h2> <strong> <div class="btn-container"> Button </div> </strong> </h2> </div>
+			<!-- <div class="colm"> <h2> <strong> Order Description </strong> </h2> </div> -->
+		</div>
+	</div>
+</div>
+
+
+<div class="container">
+	<div class="center">
+		<% @allData.each do|fetch| %>
+			<div class="row">
+				<div class="colm"> <%= fetch.id %> </div>
+				<div class="colm"> <%= fetch.email %> </div>
+				<div class="colm"> 
+					<div class="btn-container">
+						<div class="btn-box">
+							<%= link_to "Edit", edit_user_path(fetch) , class: "btn btn-success" %> 
+						</div>
+						<div class="btn-box">
+							<%= link_to "Show Orders", user_orders_path(fetch) , class: "btn btn-warning" %> 
+						</div>
+						<div class="btn-box">
+							<%= link_to "Delete", user_path(fetch) , method: :delete , class: "btn btn-danger" %> 
+						</div>
+						<div class="btn-box">
+							<%= link_to "New User", new_user_url , class: "btn btn-success" %> 
+						</div>
+					</div>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>
+	

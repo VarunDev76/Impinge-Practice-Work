@@ -1,0 +1,10 @@
+<%= data.fields_for :user do |orderData| %>
+	<p>
+		<%= orderData.label :Email %>
+		<%= orderData.text_field :email %> <br>
+	</p>
+	<p>
+		<%= orderData.label :Password %>
+		<%= orderData.password_field :password %> <br>
+	</p>
+<% end %>

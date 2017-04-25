@@ -1,0 +1,22 @@
+<h1>Users#edit</h1>
+<p>Find me in app/views/users/edit.html.erb</p>
+<%= form_for @user, url: user_path(@user) do|data| %>
+	<p>
+		<%= data.label :Email %>
+		<%= data.text_field :email %> <br>
+	</p>
+	
+	<%= data.fields_for :orders do |orderData| %>
+	    <p>
+			<%= orderData.label "Order Name"  %>
+			<%= orderData.text_field :order_name  %><br>
+		</p>
+		<p>
+			<%= orderData.label "Order Description"  %>
+			<%= orderData.text_field :order_description %><br>
+		</p>
+  	<% end %>
+	<p>
+		<%= data.submit %>
+	</p>
+<% end %>

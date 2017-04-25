@@ -1,0 +1,13 @@
+
+	<%= data.fields_for :orders do |orderData| %>
+		<div class="add_order">
+			<p>
+				<%= orderData.label "Order Name"  %>
+				<%= orderData.text_field :order_name  %><br>
+			</p>
+			<p>
+				<%= orderData.label "Order Description"  %>
+				<%= orderData.text_field :order_description %><br>
+			</p>
+		</div>
+	<% end %>
