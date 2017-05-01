@@ -1,0 +1,81 @@
+<!-- <h1>Homes#new</h1>
+<p>Find me in app/views/homes/new.html.erb</p> -->
+<style type="text/css">
+	.wrapper{display:flex;flex-flow:row wrap;width:100%;}
+	.center{width:80%;margin:0 auto;}
+	.outer-container{display:flex;flex-flow:row wrap;justify-content:space-around;line-height:70px;}
+	.row{width:100%;display:flex; flex-flow:row wrap;justify-content:space-around;line-height:70px;}
+	.second{justify-content:space-between; font-size:20px;}
+	.colm{padding:10px 15px; width:400px; text-align:center;}
+	.btn{font-weight:bold; letter-spacing:1px; padding:10px 15px; text-decoration:none; outline:none; border:none;  border-radius:10px;font-size: 18px;}
+	.btn-success{background:#00a300; color:#fff; }
+	.bottom-border{border-bottom:3px dotted #000;}
+</style>
+<!-- Tax calculator Code Start here -->
+<div class="wrapper">
+	<div class="center">
+		<div class="outer-container">
+			<div class="row">
+				<div class="colm"> <h1> <u> Tax Calculator </u> </h1> </div>
+			</div>
+			<%= form_for @tax  do|i| %>
+				<div class="row">
+					<div class="colm"> <strong> Total Income </strong>  </div>
+					<div class="colm"> <%= i.text_field :total_income %>  </div>
+				</div>
+				<div class="row">
+					<div class="colm"> <strong> Salary Under 80c </strong>  </div>
+					<div class="colm"> <%= i.text_field :salary_under_80c %>  </div>
+				</div>
+				<div class="row">
+					<div class="colm"> <strong> Salary Under 80cc </strong>  </div>
+					<div class="colm"> <%= i.text_field :salary_under_80cc %>  </div>
+				</div>
+				<div class="row">
+					<div class="colm"> <strong> Other </strong>  </div>
+					<div class="colm"> <%= i.text_field :other %>  </div>
+				</div>
+				<div class="row">
+					<div class="colm"> <strong> Medical RHS </strong>  </div>
+					<div class="colm"> <%= i.text_field :medical_rhs %>  </div>
+				</div>
+				<div class="row">
+					<div class="colm"> <strong> HRA </strong>  </div>
+					<div class="colm"> <%= i.text_field :hra %>  </div>
+				</div>
+				<div class="row">
+					<div class="colm"> <%= i.submit class: "btn btn-success" , onClick: "saveData()" %>  </div>
+					<div class="colm"> <%= i.text_field :total_tax %>  </div>
+				</div>
+			<%end%>
+		</div>
+		<!-- Tax Ratio Code Starts here -->
+		<div class="outer-container">
+			<div class="row second">
+				<div class="colm"> You are in ........ slab </div>
+			</div>
+			<div class="row second">
+				<div class="colm"> Total tax ...... </div>
+			</div>
+		</div>
+		<!-- Tax Ratio Code Endz here -->
+	</div>
+</div>
+<!-- Tax calculator Code Endz here -->
+
+<!-- Scripts Starts Here -->
+	<script type="text/javascript">
+			function saveData(){
+				var totalIncome =  $("#home_total_income").val();
+				var salaryUnder80C =  $("#home_salary_under_80c").val();
+				var salaryUnder80CC =  $("#home_salary_under_80cc").val();
+				var other =  $("#home_other").val();
+				var medicalRhs =  $("#home_medical_rhs").val();
+				var hrs =  $("#home_hra").val();
+				var totalTax = totalIncome - salaryUnder80C + salaryUnder80CC;
+				// var x = $("#home_total_tax").innerHTML(totalTax);
+				 alert(totalTax);
+			}
+	</script>
+
+<!-- Scripts Endz Here -->

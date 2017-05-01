@@ -1,0 +1,151 @@
+<!-- Tax calculator Code Start here -->
+<div class="container-fluid">
+	<div class="container">
+		<div class="col-md-12 col-xs-12">
+			<div class="col-md-12 col-xs-12">
+				<div class="col-md-12 col-xs-12 text-center"> <h1> <u> Tax Calculator </u> </h1> </div>
+			</div>
+			<%= form_tag('/calculate_tax' , :method => 'post' , remote: true , 'data-type' => :json , remote: true , class: 'form-horizontal form-label-left'  ) do %>
+
+				<div class="form-group">
+                	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Total Income <span class="required">*</span></label>
+	                <div class="col-md-6 col-sm-6 col-xs-12">
+	                  <%= text_field_tag :total_income  %>
+	                </div>
+				</div>
+				<div class="form-group">
+                	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> Salary Under 80c <span class="required">*</span></label>
+	                <div class="col-md-6 col-sm-6 col-xs-12">
+	                  <%= text_field_tag :salary_under_80c  %>
+	                </div>
+				</div>
+				<div class="form-group">
+                	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> Salary Under 80cc <span class="required">*</span></label>
+	                <div class="col-md-6 col-sm-6 col-xs-12">
+	                  <%= text_field_tag :salary_under_80cc  %>
+	                </div>
+				</div>
+				<div class="form-group">
+                	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> Other <span class="required">*</span></label>
+	                <div class="col-md-6 col-sm-6 col-xs-12">
+	                  <%= text_field_tag :other  %>
+	                </div>
+				</div>
+				<div class="form-group">
+                	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> Medical RHS <span class="required">*</span></label>
+	                <div class="col-md-6 col-sm-6 col-xs-12">
+	                  <%= text_field_tag :medical_rhs  %>
+	                </div>
+				</div>
+				<div class="form-group">
+                	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> HRA <span class="required">*</span></label>
+	                <div class="col-md-6 col-sm-6 col-xs-12">
+	                  <%= text_field_tag :hra  %>
+	                </div>
+				</div>
+				<div class="form-group">
+                	
+	                <div class="col-md-6 col-sm-6 col-xs-12">
+	                  <%= submit_tag "Calculate" , class: "btn btn-success btn-lg", id: "submit" %>
+	                </div>
+				</div>
+				
+			<%end%>
+		</div>
+		<!-- Tax Ratio Code Starts here -->
+			<div class="col-md-12 col-xs-12">
+				<div class="table-responsive">
+					<table class="table table-bordered table-inverse">
+						<thead>
+							<tr>
+								<th class="text-center">Slab</th>
+								<th class="text-center">Tax</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="text-center">
+								<td id="slab"> </td>
+								<td id="tax"> </td>
+							</tr>
+							<tr class="text-center">
+								<td id="blank-slab"> </td>
+								<td id="blank-tax"> </td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		<!-- Tax Ratio Code Endz here -->
+	</div>
+</div>
+<!-- Tax calculator Code Endz here -->
+
+<!-- Tax Slab Code Start here -->
+	
+	<!-- <div class="container-fluid">
+		<div class="container">
+			<div class="col-md-12">
+				<div class="table-responsive">
+					<table class="table table-bordered table-inverse ">
+						<thead>
+							<tr>
+								<th colspan="3" class="text-center"> <h3> <strong> Slab </strong> </h3> </th>
+							</tr>
+						</thead>
+						<thead>
+							<tr>
+								<th class="text-center">Rate</th>
+								<th class="text-center">Start</th>
+								<th class="text-center">End</th>
+							</tr>
+						</thead>
+						<%# TaxSlab.all.each do |slab|%>
+						<tbody class="text-center">
+							<tr>
+								<th scope="row" class="text-center"> <%#= slab.rate %> </th>
+								<td>  <%#= slab.start %> <span> Lac </span> </td>
+								<td>  <%#= slab.end %> <span> Lac </span> </td>
+							</tr>
+						</tbody>
+						<%#end%>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div> -->
+
+<!-- Tax Slab Code Endz here -->
+
+<div class="result"></div>
+
+<!-- Scripts Starts Here -->
+	<script type="text/javascript">
+			$("#submit").click(function(e){
+				// e.preventDefault();
+				var totalIncome =  $("#total_income").val();
+				var salaryUnder80C =  $("#salary_under_80c").val();
+				var salaryUnder80CC =  $("#salary_under_80cc").val();
+				var other =  $("#other").val();
+				var medicalRhs =  $("#medical_rhs").val();
+				var hra =  $("#hra").val();
+				// var totalTax = totalIncome - salaryUnder80C - salaryUnder80CC - other;
+				$.ajax({
+					type: "POST",
+					url: "/calculate_tax",
+					dataType: "json",
+					data: {total_income: totalIncome, salary_under_80c: salaryUnder80C , salary_under_80cc: salaryUnder80CC , other: other , medical_rhs: medicalRhs , hra: hra },
+					success: function(slab){
+						// alert("Successfull save " + " " + slab.taxSlab)
+						// console.log("Successfull save" + " " + slab.taxSlab)
+						$("td#slab").html("You are in <strong>  " + slab.taxSlab + "</strong> slab <br> ").fadeIn(2000)
+						$("td#tax").html("Total tax <strong>  " + slab.taxResult + "</strong> <br>").fadeIn(2000)
+							
+					}
+				});
+			});
+	</script>
+
+<!-- Scripts Endz Here -->
+
+
+

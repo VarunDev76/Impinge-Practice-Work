@@ -1,0 +1,2 @@
+class TaxSlab < ApplicationRecord
+end
