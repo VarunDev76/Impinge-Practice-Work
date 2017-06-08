@@ -1,23 +1,6 @@
 Rails.application.routes.draw do
-  # get 'comments/index'
-
-  # get 'comments/show'
-
-  # get 'comments/delete'
-
-  # get 'comments/update'
-
-  # get 'comments/new'
-
-  # get 'posts/index'
-
-  # get 'posts/show'
-
-  # get 'posts/delete'
-
-  # get 'posts/update'
-
-  # get 'posts/new'
+  root 'posts#index'
+  
   resources :posts do
     resources :comments
   end
@@ -25,7 +8,6 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

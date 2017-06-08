@@ -8,40 +8,53 @@
 			<%= form_tag('/calculate_tax' , :method => 'post' , remote: true , 'data-type' => :json , remote: true , class: 'form-horizontal form-label-left'  ) do %>
 
 				<div class="form-group">
-                	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Total Income <span class="required">*</span></label>
+                	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="total-income">Total Income <span class="required">*</span></label>
 	                <div class="col-md-6 col-sm-6 col-xs-12">
 	                  <%= text_field_tag :total_income  %>
 	                </div>
 				</div>
+				<span onchange="allSum()">
+					<div class="form-group">
+	                	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="salary-under-80c"> Salary Under 80c <span class="required">*</span></label>
+		                <div class="col-md-6 col-sm-6 col-xs-12">
+		                  <%= text_field_tag :salary_under_80c , params[:salary_under_80c] , :onchange => "taxLimit($(this))"  %>
+		                </div>
+					</div>
+					<div class="form-group">
+	                	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="salary-under-80cc"> Salary Under 80cc <span class="required">*</span></label>
+		                <div class="col-md-6 col-sm-6 col-xs-12">
+		                  <%= text_field_tag :salary_under_80cc , params[:salary_under_80cc] , :onchange => "taxLimit($(this))"  %>
+		                </div>
+					</div>
+					<div class="form-group">
+	                	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="other"> Other <span class="required">*</span></label>
+		                <div class="col-md-6 col-sm-6 col-xs-12">
+		                  <%= text_field_tag :other , params[:other] , :onchange => "taxLimit($(this))"  %>
+		                </div>
+					</div>
+				</span>
 				<div class="form-group">
-                	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> Salary Under 80c <span class="required">*</span></label>
+                	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="medical-rhs"> Medical RHS <span class="required">*</span></label>
 	                <div class="col-md-6 col-sm-6 col-xs-12">
-	                  <%= text_field_tag :salary_under_80c  %>
+	                  <%= text_field_tag :medical_rhs , params[:medical_rhs] , :onchange => "medicalReport($)"  %>
 	                </div>
 				</div>
 				<div class="form-group">
-                	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> Salary Under 80cc <span class="required">*</span></label>
-	                <div class="col-md-6 col-sm-6 col-xs-12">
-	                  <%= text_field_tag :salary_under_80cc  %>
+                		<div class=" text-center col-md-12 col-sm-12 col-xs-12" for="hra"> <strong> HRA </strong> <span class="required">*</span></div>
+	                <hr>
+	                <div class="form-group">
+	                	<label for="basic-salary" class="control-label col-md-3 col-sm-3 col-xs-12"> Basic Salary <span class="required"> * </span> </label>
+	                	<div class="col-md-7"> <%= text_field_tag :basic_salary %> </div>
 	                </div>
-				</div>
-				<div class="form-group">
-                	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> Other <span class="required">*</span></label>
-	                <div class="col-md-6 col-sm-6 col-xs-12">
-	                  <%= text_field_tag :other  %>
+	                <div class="form-group">
+	                	<label for="basic-salary" class="control-label col-md-3 col-sm-3 col-xs-12"> HRA <span class="required">*</span></label>
+	                	<div class="col-md-7"> <%= text_field_tag :hra %> </div>
 	                </div>
-				</div>
-				<div class="form-group">
-                	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> Medical RHS <span class="required">*</span></label>
-	                <div class="col-md-6 col-sm-6 col-xs-12">
-	                  <%= text_field_tag :medical_rhs  %>
+	                <div class="form-group">
+	                	<label for="basic-salary" class="control-label col-md-3 col-sm-3 col-xs-12"> Home Rent <span class="required">*</span></label>
+	                	<div class="col-md-7"> <%= text_field_tag :home_rent %> </div>
 	                </div>
-				</div>
-				<div class="form-group">
-                	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> HRA <span class="required">*</span></label>
-	                <div class="col-md-6 col-sm-6 col-xs-12">
-	                  <%= text_field_tag :hra  %>
-	                </div>
+
 				</div>
 				<div class="form-group">
                 	
@@ -58,18 +71,16 @@
 					<table class="table table-bordered table-inverse">
 						<thead>
 							<tr>
-								<th class="text-center">Slab</th>
-								<th class="text-center">Tax</th>
+								<th class="text-center"> Home Rent </th>
+								<th class="text-center"> Basic Salary </th>
+								<th class="text-center"> Minimum Hra </th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr class="text-center">
-								<td id="slab"> </td>
-								<td id="tax"> </td>
-							</tr>
-							<tr class="text-center">
-								<td id="blank-slab"> </td>
-								<td id="blank-tax"> </td>
+								<td id="homeRent"> </td>
+								<td id="basicSalary"> </td>
+								<td id="hra"> </td>
 							</tr>
 						</tbody>
 					</table>
@@ -120,25 +131,63 @@
 
 <!-- Scripts Starts Here -->
 	<script type="text/javascript">
+		function taxLimit(value){
+			var singleObjectCheck = $(value).val();
+			var changeToInt = parseInt(singleObjectCheck);
+			check = checkCondition(changeToInt,150000);
+			if (check == true) {
+				alert("You Should Not Cross limit 150000 Lac ");
+				$(value).val("");
+			};
+		}
+		function allSum(){
+			var salaryUnder80C =  $('#salary_under_80c').val();
+			var salaryUnder80CC =  $('#salary_under_80cc').val();
+			var other =  $('#other').val();
+			var sum = parseInt(salaryUnder80C) + parseInt(salaryUnder80CC) + parseInt(other);
+			check = checkCondition(sum,150000);
+			if (check == true) {
+				alert("You Should Not Cross limit 150000 Lac ");
+				$("#salary_under_80c").val("");
+				$("#salary_under_80cc").val("");
+				$("#other").val("");
+			}
+		}
+		function medicalReport(value){
+			var medicalRhs = $("#medical_rhs").val();
+			var changeToInt = parseInt(medicalRhs);
+			check = checkCondition(changeToInt , 15000);
+			if (check == true) {
+				alert("You were cross the Medical RHS limit is 15000 ");
+				$("#medical_rhs").val("");
+			};
+		}
+		function checkCondition(key , value){
+				if (key >= value){
+					return true
+				}
+		}
 			$("#submit").click(function(e){
-				// e.preventDefault();
+				e.preventDefault();
 				var totalIncome =  $("#total_income").val();
 				var salaryUnder80C =  $("#salary_under_80c").val();
 				var salaryUnder80CC =  $("#salary_under_80cc").val();
 				var other =  $("#other").val();
 				var medicalRhs =  $("#medical_rhs").val();
+				var basicSalary =  $("#basic_salary").val();
 				var hra =  $("#hra").val();
-				// var totalTax = totalIncome - salaryUnder80C - salaryUnder80CC - other;
+				var homeRent =  $("#home_rent").val();
 				$.ajax({
 					type: "POST",
 					url: "/calculate_tax",
 					dataType: "json",
-					data: {total_income: totalIncome, salary_under_80c: salaryUnder80C , salary_under_80cc: salaryUnder80CC , other: other , medical_rhs: medicalRhs , hra: hra },
+					data: {total_income: totalIncome, salary_under_80c: salaryUnder80C , salary_under_80cc: salaryUnder80CC , other: other , medical_rhs: medicalRhs , basic_salary: basicSalary , home_rent: homeRent , hra: hra },
 					success: function(slab){
 						// alert("Successfull save " + " " + slab.taxSlab)
 						// console.log("Successfull save" + " " + slab.taxSlab)
-						$("td#slab").html("You are in <strong>  " + slab.taxSlab + "</strong> slab <br> ").fadeIn(2000)
-						$("td#tax").html("Total tax <strong>  " + slab.taxResult + "</strong> <br>").fadeIn(2000)
+						$("td#homeRent").html("Home Rent is <strong>  " + slab.homeRent + "</strong>  <br> ").fadeIn(2000)
+						$("td#basicSalary").html("Basic Salary is  <strong>  " + slab.basicSalary + "</strong> <br>").fadeIn(2000)
+						$("td#hra").html("Minimum Hra <strong>  " + slab.minimumValue + "</strong> <br>").fadeIn(2000)
 							
 					}
 				});

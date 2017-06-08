@@ -1,3 +1,4 @@
 class Order < ApplicationRecord
-	belongs_to :user, optional: true
+	has_many :organization 
+	has_many :user , through: :organization
 end

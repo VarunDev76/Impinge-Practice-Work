@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title> Payment Gateway </title>
+	<!-- <link rel="stylesheet" href="../css/bootstrap.min.css"> -->
+	<!-- // <script type="text/javascript" src="../js/bootstrap.min.js"></script> -->
+	<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="input-boxes">
+			<div class="input-label"> <h3> <strong> Enter Amount </strong> </h3> </div>
+			<div class="input-box"> <input type="text" name="payment" id="payment" value="150"> </div>
+		</div>
+	</div>
+
+	<div id="paypal-button-container"></div>
+
+	<div id="confirm" class="hidden">
+	    <div>Ship to:</div>
+	    <div><span id="recipient"></span>, <span id="line1"></span>, <span id="city"></span></div>
+	    <div><span id="state"></span>, <span id="zip"></span>, <span id="country"></span></div>
+
+	    <button id="confirmButton">Complete Payment</button>
+	</div>
+
+	<div id="thanks" class="hidden">
+	    Thanks, <span id="thanksname"></span>!
+	</div>
+
+<style>
+	.hidden{display:none;}
+</style>
+
+	<script type="text/javascript">
+	    // Render the PayPal button
+
+	    paypal.Button.render({
+
+	        // Set your environment
+
+	        env: 'sandbox', // sandbox | production
+
+	        // PayPal Client IDs - replace with your own
+	        // Create a PayPal app: https://developer.paypal.com/developer/applications/create
+
+	        client: {
+	            sandbox: 'AYzYSojDth-wN3P-hHsC3yQNEEEWs92RMEGLBFma1iCs5TJ51CCJ2AQYlCYVlSA69qfGh_WQ1SyMP5oF',
+	            production: '<insert production client id>'
+	        },
+
+	        // Set to 'Pay Now'
+
+	        commit: true,
+
+	        // Wait for the PayPal button to be clicked
+
+	        payment: function() {
+
+	            // Make a client-side call to the REST api to create the payment
+
+	            return paypal.rest.payment.create(this.props.env, this.props.client, {
+	                transactions: [
+	                    {
+	                        amount: { total: '50' , currency: 'USD' }
+	                    }
+	                ]
+	            });
+	        },
+
+	        // Wait for the payment to be authorized by the customer
+
+	        onAuthorize: function(data, actions) {
+
+	            // Execute the payment
+
+	            // return actions.payment.execute().then(function() {
+	            //     document.querySelector('#paypal-button-container').innerText = 'Payment Complete!';
+	            // });
+
+	            return actions.payment.get().then(function(data) {
+
+                // Display the payment details and a confirmation button
+
+                var shipping = data.payer.payer_info.shipping_address;
+
+                document.querySelector('#recipient').innerText = shipping.recipient_name;
+                document.querySelector('#line1').innerText     = shipping.line1;
+                document.querySelector('#city').innerText      = shipping.city;
+                document.querySelector('#state').innerText     = shipping.state;
+                document.querySelector('#zip').innerText       = shipping.postal_code;
+                document.querySelector('#country').innerText   = shipping.country_code;
+                // document.querySelector('#totalAmount').innerText = data.transactions;
+
+                document.querySelector('#paypal-button-container').style.display = 'none';
+                document.querySelector('#confirm').style.display = 'block';
+
+                // Listen for click on confirm button
+
+                document.querySelector('#confirmButton').addEventListener('click', function() {
+
+                    // Disable the button and show a loading message
+
+                    document.querySelector('#confirm').innerText = 'Loading...';
+                    document.querySelector('#confirm').disabled = true;
+
+                    // Execute the payment
+
+                    return actions.payment.execute().then(function() {
+
+                        // Show a thank-you note
+
+                        document.querySelector('#thanksname').innerText = shipping.recipient_name;
+
+                        document.querySelector('#confirm').style.display = 'none';
+                        document.querySelector('#thanks').style.display = 'block';
+                    });
+                });
+            });
+	        }
+
+	    }, '#paypal-button-container');
+
+	</script>
+
+</body>
+</html>

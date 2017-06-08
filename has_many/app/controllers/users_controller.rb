@@ -2,6 +2,12 @@ class UsersController < ApplicationController
     
   def index
     @allData = User.all
+    @products = @allData
+    respond_to do |format|
+      format.html
+      format.csv { send_data @products.to_csv }
+      format.xls { send_data @products.to_csv(col_sep: "\t") }
+    end
   end
 
   def show
@@ -11,11 +17,10 @@ class UsersController < ApplicationController
     # binding.pry
     @user = User.new
     @user.orders.build
-    # 3.times { @user.orders.build }
+    # 3.times { @user.orders.build }            3 Times Save Orders at a Time
   end
 
   def create
-    # binding.pry
     @user = User.new(user_params)
     if @user.save
       redirect_to users_url      
@@ -27,7 +32,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    # binding.pry
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       redirect_to users_path
@@ -44,7 +48,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, orders_attributes: [:id, :user_id, :order_name, :order_description, :_destroy] )
+    params.require(:user).permit( :email, :password, orders_attributes: [:id, :user_id, :order_name, :order_description, :_destroy] )
   end
 
 end

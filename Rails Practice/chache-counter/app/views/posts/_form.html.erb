@@ -1,0 +1,6 @@
+<%= f.fields_for :comments do|fe| %>
+	<p>
+		<%= fe.label 'Write Comments' %>
+		<%= fe.text_field :comment %>
+	</p>
+<% end %>

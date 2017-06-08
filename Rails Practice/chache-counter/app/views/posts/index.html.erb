@@ -18,12 +18,24 @@
 		/*flex:1;*/
 		flex-wrap:wrap;
 		width:30%;
+		line-height: 70px;
 		word-wrap:break-word;
 		text-align: center;
 		padding:1%;
 		font-size:30px;
 	}
-	.btn{text-decoration:none;}
+	.btn{
+		display:flex;
+		flex-grow:row wrap;
+		justify-content:center;
+		text-decoration:none;
+		padding:15px 20px;
+		border-radius: 20px;
+		margin:8px;
+	}
+	.btn-success{background:#00a300;}
+	.btn-danger{background: #ee1111;}
+	.btn-warning{background:#da532c;}
 </style>
 
 <% if @errors && @errors.size > 0 %>
@@ -38,6 +50,8 @@
 	<div class="center">
 		<div class="colm"> <strong> Id </strong> </div>
 		<div class="colm"> <strong> Post </strong> </div>
+		<div class="colm"> <strong> Comments </strong> </div>
+		<div class="colm"> <strong> How many Comments </strong> </div>
 		<div class="colm"> <strong> Buttons </strong> </div>
 	</div>
 </div>
@@ -47,11 +61,13 @@
 		<div class="center">		
 			<div class="colm"> <strong> <%= u.id %> </strong> </div>
 			<div class="colm"> <%= getclass(u.post)  %> </div>
+			<div class="colm"> <%= getclass(u.post)  %> </div>
+			<div class="colm"> <%= u.comments.size  %> </div>
 			<div class="colm"> 
-				<%= link_to " Show " , post_path(u) , class: "btn" %> 
-				<%= link_to " Delete " , post_path(u) , method: :delete , confirm: 'Are You Sure ' , class: "btn" %> 
-				<%= link_to " New Records " , new_post_comment_path(u) , class: "btn" %> 
-				<%= link_to " New post " , new_post_path , class: "btn" %> 
+				<%= link_to " Show " , post_path(u) , class: "btn btn-success" %> 
+				<%= link_to " Delete " , post_path(u) , method: :delete , confirm: 'Are You Sure ' , class: "btn btn-danger" %>
+				<%= link_to " New Comments " , new_post_comment_url(u) , method: :delete , confirm: 'Are You Sure ' , class: "btn btn-success" %>
+				<%= link_to " New post " , new_post_path , class: "btn btn-danger" %> 
 			</div>
 		</div>
 	</div>

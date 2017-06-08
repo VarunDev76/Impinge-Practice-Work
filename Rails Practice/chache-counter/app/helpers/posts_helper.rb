@@ -1,6 +1,6 @@
 module PostsHelper
 	def getclass(result)
-		return result == "no" ? "#ff0000" : "#00ff00"
+		return result == "no" ? "Sahhi ha" : "Wrong Word Type"
 	end
 
 end

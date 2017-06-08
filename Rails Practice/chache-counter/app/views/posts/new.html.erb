@@ -6,6 +6,9 @@
 		<%= p.text_field :post %>
 	</p>
 	<p>
+		<%= render partial: 'form' , locals: {f:p} %>
+	</p>
+	<p>
 		<%= p.submit %>
 	</p>
 <% end %>

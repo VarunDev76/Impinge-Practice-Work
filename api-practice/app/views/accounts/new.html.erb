@@ -1,0 +1,21 @@
+<style>
+	.top-margin{margin:25px 15px;}
+	.btn{padding:15px 20px; text-decoration:none; border-radius:10px;}
+	.btn-danger{background:#2fbdbd; color:#fff; font-size:18px; font-weight:bold/18vw 20vh;}
+</style>
+<p class="top-margin">
+	<%= link_to "logout" , destroy_user_session_url , class: "btn btn-danger" %>
+</p>
+<%= form_for @newAccount do|account| %>
+	<p>
+		<%= account.label "User Name" %>
+		<%= account.text_field :name %>
+	</p>
+	<p>
+		<%= account.label "Address" %>
+		<%= account.text_field :address %>
+	</p>
+	<p>
+		<%= account.submit %>
+	</p>
+<% end %>

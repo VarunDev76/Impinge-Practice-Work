@@ -2,9 +2,6 @@
 <p>Find me in app/views/orders/new.html.erb</p>
 <%= form_for @order , url: user_orders_url do|data| %>
 	<p>
-		<%= render partial: 'form' , locals: {data: data} %> <br>
-	</p>
-	<p>
 		<%= data.label "Order Name"  %>
 		<%= data.text_field :order_name  %><br>
 	</p>

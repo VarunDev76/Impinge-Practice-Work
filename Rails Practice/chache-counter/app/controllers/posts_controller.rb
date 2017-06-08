@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   def index
-    # @posts = Post.all
-    @posts = Post.joins(:users).select("users.*,comments.*").find params[:id]
+    @posts = Post.all
+    # @posts = Post.joins(:users).select("users.*,comments.*").find params[:id]
     # @posts = Post.find_each { |post| Post.reset_counters(post.id, :comments)}
   end
 
@@ -16,6 +16,7 @@ class PostsController < ApplicationController
 
   def new
     @posts = Post.new
+    @posts.comments.build
   end
 
   def create
@@ -31,7 +32,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    return params.require(:post).permit(:post)
+    return params.require(:post).permit(:post , :comments_attributes => [:id, :post_id, :comment] )
   end
 
 end
